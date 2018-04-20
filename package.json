@@ -1,0 +1,36 @@
+{
+  "name": "grolite",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "chart.js": "^2.7.2",
+    "expo": "^26.0.0",
+    "history": "^4.7.2",
+    "moment": "^2.22.1",
+    "react": "^16.3.2",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-background-video-player": "^1.0.1",
+    "react-chartjs-2": "^2.7.0",
+    "react-datepicker": "^1.4.1",
+    "react-dom": "^16.3.2",
+    "react-infinite-calendar": "^2.3.1",
+    "react-player": "^1.4.0",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.4",
+    "react-video-cover": "^1.2.0",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "semantic-ui-calendar": "0.0.8",
+    "semantic-ui-less": "^2.3.1",
+    "semantic-ui-react": "^0.79.1",
+    "styled-components": "^3.2.5",
+    "video-react": "^0.10.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

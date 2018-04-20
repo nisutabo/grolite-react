@@ -1,0 +1,36 @@
+.about-container {
+  background-image: url("../assets/strawberry.gif");
+  width: 100%;
+  background-size: cover;
+  min-height: 100vh;
+  position: absolute;
+  top: 45px;
+  left: 0;
+}
+
+.about-headline {
+  color: white;
+  vertical-align: middle;
+  font-family: Helvetica;
+  font-size: 4em;
+  padding-top: 225px;
+  text-align: center;
+}
+
+.about-text {
+  color: white;
+  vertical-align: middle;
+  font-family: Helvetica-Light;
+  font-size: 25px;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.about-snippet {
+  color: white;
+  vertical-align: top;
+  font-family: Helvetica-Light;
+  font-size: 20px;
+  padding-top: 10px;
+  text-align: center;
+}
