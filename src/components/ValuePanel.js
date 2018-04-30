@@ -4,9 +4,6 @@ import { Container, Table } from 'semantic-ui-react';
 import styled from 'styled-components'
 
 
-class ValuePanel extends Component {
-  render (){
-
     const HeaderLabel = styled.label`
       font-family: Helvetica !important;
       font-size: 14px !important;
@@ -17,10 +14,14 @@ class ValuePanel extends Component {
       font-size: 12px !important;
       color: nlack !important
     `
+
+class ValuePanel extends Component {
+  
+  render (){
+
     let value = this.props.group.expected_harvest_lbs * this.props.crop.market_value
     let percentage_of_total = Math.round((value / parseInt(this.props.total_value, 10)) * 100)
-    console.log(value)
-    console.log(parseInt(this.props.total_value, 10))
+
     return (
 
       <Container>

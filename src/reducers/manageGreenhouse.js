@@ -60,15 +60,25 @@ export default function manageGreenhouse (
       data: {...state.data, tasks: tasks}
     }
     case 'PATCH_TASK':
-     let id = action.payload.id
-     let task = state.data.tasks.find(task => parseInt(task.id, 10) === parseInt(id, 10))
-     let index = state.data.tasks.indexOf(task)
+     let task_id = action.payload.id
+     let task = state.data.tasks.find(task => parseInt(task.id, 10) === parseInt(task_id, 10))
+     let indexOfTask = state.data.tasks.indexOf(task)
      task.done = true
      let newTasks = state.data.tasks.slice()
-     newTasks[index] = task
+     newTasks[indexOfTask] = task
     return {
       ...state,
       data: {...state.data, tasks: newTasks}
+    }
+    case 'PATCH_GROUP':
+     let group_id = action.payload.id
+     let group = state.groups.find(group => parseInt(group.id, 10) === parseInt(group_id, 10))
+     let indexOfGroup = state.groups.indexOf(group)
+     state.groups.splice(indexOfGroup, 1, action.payload)
+
+    return {
+      ...state,
+      group: action.payload
     }
 
     default:

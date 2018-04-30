@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchCrop, fetchData } from '../actions';
-import RadarChart from '../components/RadarChart'
-import CurrentExposureBar from '../components/CurrentExposureBar'
+import RadarChartA from '../components/RadarChartA';
+import CurrentExposureBar from '../components/CurrentExposureBar';
 import LineChart from '../components/LineChart';
 import StatusSection from './StatusSection';
-import { Grid, Divider } from 'semantic-ui-react';
-import styled from 'styled-components'
+import { Grid, Divider, Container } from 'semantic-ui-react';
+import styled from 'styled-components';
+import LoaderExampleLoader from '../components/Loader';
 
-
+const CustomLabel = styled.label`
+  font-family: Arial !important;
+  font-size: 20px !important;
+  padding-bottom: 30px !important;
+`
 
 class Group extends Component {
 
@@ -17,15 +22,10 @@ class Group extends Component {
   }
 
   render (){
-    console.log(this.props.loading)
-    const CustomLabel = styled.label`
-      font-family: Arial !important;
-      font-size: 20px !important;
-      padding-bottom: 30px !important;
-    `
+
       return (
-        <div>
-        {this.props.loading || this.props.fetched ? <div> LOADING... </div>
+        <Container>
+        {this.props.loading || this.props.fetched ? <Container> <LoaderExampleLoader /> </Container>
         :<Grid columns={2} divided padded='horizontally'>
           <Grid.Row height={20}>
             <Grid.Column width={8}>
@@ -36,7 +36,7 @@ class Group extends Component {
             <Divider />
             <CurrentExposureBar />
             <Divider />
-            <RadarChart />
+            <RadarChartA />
             </Grid.Column>
             <Grid.Column width={8}>
             <CustomLabel> </CustomLabel>
@@ -47,7 +47,7 @@ class Group extends Component {
           </Grid.Row>
         </Grid>
         }
-        </div>
+        </Container>
       )
   }
 }

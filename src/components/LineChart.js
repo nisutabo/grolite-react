@@ -28,15 +28,21 @@ class LineChart extends Component {
       }
 
 
+
     const optimalHumidity = () => {
       let result = [];
-      if (parseInt(this.props.data.current_time.split(':')[0], 10) <= this.props.data.sunset){
+      if (this.props.data.current_humidity > this.props.crop.maxhumidity){
         while (result.length < hours.length){
           result.push(this.props.crop.maxhumidity)
         }
-      } else {
+      } else if (this.props.data.current_humidity < this.props.crop.minhumidity) {
         while (result.length < hours.length){
           result.push(this.props.crop.minhumidity)
+        }
+      }
+       else {
+        while (result.length < hours.length){
+          result.push(this.props.crop.maxhumidity)
         }
       }
       return result
@@ -44,26 +50,33 @@ class LineChart extends Component {
 
 
     const temperaturePeriod = () => {
-      if (parseInt(this.props.data.current_time.split(':')[0], 10) <= this.props.data.sunset){
+      if ((parseInt(this.props.data.current_time.split(':')[0], 10) > this.props.data.sunrise) && (parseInt(this.props.data.current_time.split(':')[0], 10) < this.props.data.sunset)){
         return 'Optimal Daytime Temperature \xB0F'
       } else {
         return 'Optimal Nightime Temperature \xB0F'
       }
     }
 
-    const humidityPeriod = () => {
-      if (parseInt(this.props.data.current_time.split(':')[0], 10) <= this.props.data.sunset){
-        return 'Optimal Humidity % (Ceiling)'
-      } else {
-        return 'Optimal Humidity % (Floor)'
+    const humidityBenchmark = () => {
+      if (this.props.data.current_humidity > this.props.crop.maxhumidity){
+        return 'Humidity Ceiling %'
+      }
+      else if (this.props.data.current_humidity < this.props.crop.minhumidity) {
+        return 'Humidity Floor %'
+      }
+      else {
+        return 'Humidity Ceiling %'
       }
     }
 
 
-
-    console.log(this.props.data.current_time.split(':')[0])
-    console.log(this.props.data.sunset)
-    console.log(this.props.crop.temp_night)
+    const country = () => {
+      if (this.props.group.location === 'London, UK'){
+        return 'gb'
+      } else {
+        return 'us'
+      }
+    }
     const lineValues = {
 
       labels: hours,
@@ -91,7 +104,7 @@ class LineChart extends Component {
 
             }, {
               type: 'line',
-              label: humidityPeriod(),
+              label: humidityBenchmark(),
               data: optimalHumidity(),
               borderColor: 'black',
               backgroundColor: 'rgba(0, 0, 0, 0)',
@@ -107,7 +120,10 @@ class LineChart extends Component {
                 display: true,
                 labels: {
                     fontColor: 'black',
-                    xAxisID: 'Hour (Military Time)'
+                    xAxisID: 'Hour (Military Time)',
+                    fontSize: 12,
+                    boxWidth: 12
+
                 }
             },
             title: {
@@ -121,7 +137,11 @@ class LineChart extends Component {
                   labelString: "Humidity %  /  Temperature \xB0F"
                 },
                 ticks: {
-                  fontSize: 10
+                  fontSize: 10,
+                  beginAtZero: true,
+                  steps: 10,
+                  stepValue: 5,
+                  max: 100
                 }
               }],
               xAxes: [{
@@ -138,7 +158,7 @@ class LineChart extends Component {
     return (
       <div>
       <br></br>
-      <div>{this.props.group.location} <Flag name={'us'} /></div>
+      <div>{this.props.group.location} <Flag name={country()} /></div>
       {this.props.data.current_time}
         <Bar data={lineValues} height={230} options={chartOptions}/>
       </div>

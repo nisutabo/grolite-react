@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 import { Grid, Container, Button } from 'semantic-ui-react';
 import styled from 'styled-components'
 
-class StatusPanel extends Component {
 
-
- render(){
 
    const HeaderLabel = styled.label`
      font-family: Helvetica !important;
@@ -14,9 +11,13 @@ class StatusPanel extends Component {
      color: grey !important
    `
    const BigLabel = styled.label`
-     font-family: Helvetica !important;
+     font-family: Helvetica-Light !important;
      font-size: 15px !important;
-
+   `
+   const HarvestLabel = styled.label`
+     font-family: Helvetica-Light !important;
+     font-size: 14px !important;
+     color: black
    `
    const SmallLabel = styled.label`
      font-family: Helvetica !important;
@@ -28,6 +29,37 @@ class StatusPanel extends Component {
      font-weight: bold !important;
    `
 
+class StatusPanel extends Component {
+
+
+  statusCheck = () => {
+    let propagation_date = new Date(this.props.group.propagation_date.split('T'));
+    let production_date = new Date(this.props.group.production_date.split('T'));
+    let harvest_date = new Date(this.props.group.harvest_date.split('T'));
+
+    let result = [];
+    let day = 86400000;
+
+    let today = new Date ();
+
+    if (today < propagation_date) {
+      result.push('GERMINATION');
+      result.push(Math.round((propagation_date - today) / day))
+    } else if ((today >= propagation_date) && (today < production_date)) {
+      result.push('PROPAGATION');
+      result.push(Math.round((production_date - propagation_date) / day))
+    } else if ((today >= production_date) && (today < harvest_date)) {
+      result.push('PRODUCTION');
+      result.push(Math.round((harvest_date - production_date) / day))
+    } else {
+      result.push('DUE FOR HARVEST')
+    }
+    return result
+  }
+
+
+ render(){
+
    return (
      <Container>
      <HeaderLabel>STATUS</HeaderLabel>
@@ -38,14 +70,17 @@ class StatusPanel extends Component {
           <Grid.Column verticalAlign='middle'>
           <Container textAlign='center'>
             <BigLabel>
+            {this.statusCheck()[0] === 'DUE FOR HARVEST' ? <Button color='green'><HarvestLabel>DUE FOR HARVEST</HarvestLabel></Button>
+            :
               <Button animated>
                 <Button.Content visible >
-                  <BigLabel>{this.props.data.status[0]}</BigLabel>
+                  <BigLabel>{this.statusCheck()[0]}</BigLabel>
                 </Button.Content>
                 <Button.Content hidden>
-                    <SmallLabel>for {this.props.data.status[1]} more days</SmallLabel>
+                    <SmallLabel>for {this.statusCheck()[1]} more days</SmallLabel>
                 </Button.Content>
               </Button>
+            }
             </BigLabel>
           </Container>
           </Grid.Column>

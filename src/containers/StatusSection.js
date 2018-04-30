@@ -12,8 +12,6 @@ import NutrientsPanel from '../components/NutrientsPanel'
 class StatusSection extends Component {
  render(){
 
-
-
    return (
      <Grid divided='vertically' padded='horizontally'>
         <Grid.Row columns={1}>

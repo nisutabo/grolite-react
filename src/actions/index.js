@@ -1,6 +1,6 @@
 export function signUp(username, password, history){
   return function(dispatch){
-    fetch("http://localhost:9000/api/v1/signup", {
+    fetch("http://localhost:3001/api/v1/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export function signUp(username, password, history){
 
 export function logIn(username, password, history){
   return function(dispatch){
-    fetch("http://localhost:9000/api/v1/login", {
+    fetch("http://localhost:3001/api/v1/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,14 +53,14 @@ export function logIn(username, password, history){
 
 export function getUser(jwt, history){
   return function(dispatch){
-    fetch('http://localhost:9000/api/v1/get_user', {
+    fetch('http://localhost:3001/api/v1/get_user', {
       headers: {
         "Authorization": jwt
       }
     })
     .then(res => res.json())
     .then(response => {
-      console.log(response)
+
       dispatch({
         type: "GET_USER_DATA",
         payload: response
@@ -80,7 +80,7 @@ export const logOut = () => {
 
 export const fetchGroups = (id) => {
   return (dispatch) => {
-    return fetch(`http://localhost:9000/api/v1/users/${id}/groups`)
+    return fetch(`http://localhost:3001/api/v1/users/${id}/groups`)
     .then(resp => resp.json())
     .then(result => {
       let payload = result
@@ -95,7 +95,7 @@ export const fetchGroups = (id) => {
 
 export const fetchCrop = (cropID) => {
   return (dispatch) => {
-    return fetch(`http://localhost:9000/api/v1/crops/${cropID}`)
+    return fetch(`http://localhost:3001/api/v1/crops/${cropID}`)
     .then(resp => resp.json())
     .then(result => {
       let payload = result
@@ -114,7 +114,7 @@ export const fetchData = (groupID) => {
       type: 'LOADING'
     })
 
-    return fetch(`http://localhost:9000/api/v1/groups/${groupID}/data`)
+    return fetch(`http://localhost:3001/api/v1/groups/${groupID}/data`)
     .then(resp => resp.json())
     .then(result => {
       let payload = result
@@ -130,7 +130,7 @@ export const fetchData = (groupID) => {
 
 export const addGroup = (group) => {
   return (dispatch) => {
-    return fetch(`http://localhost:9000/api/v1/groups`, {
+    return fetch(`http://localhost:3001/api/v1/groups`, {
         method: 'POST',
         headers: {Accept: 'application/json',
         'Content-Type': 'application/json'
@@ -157,9 +157,32 @@ export const addGroup = (group) => {
     }
   }
 
+  export const patchGroup = (group) => {
+    return (dispatch) => {
+      return fetch(`http://localhost:3001/api/v1/groups/${group.id}`, {
+          method: 'PATCH',
+          headers: {Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+          body: JSON.stringify({
+            germination_days: group.germination_days,
+            propagation_days: group.propagation_days,
+            production_days: group.production_days
+          })
+        })
+        .then(resp => resp.json())
+        .then(result => {
+          dispatch({
+            type: 'PATCH_GROUP',
+            payload: result
+          })
+        })
+      }
+    }
+
 export const addReading = (reading) => {
   return (dispatch) => {
-    return fetch(`http://localhost:9000/api/v1/readings`, {
+    return fetch(`http://localhost:3001/api/v1/readings`, {
         method: 'POST',
         headers: {Accept: 'application/json',
         'Content-Type': 'application/json'
@@ -182,7 +205,7 @@ export const addReading = (reading) => {
 
   export const addTask = (task) => {
     return (dispatch) => {
-      return fetch(`http://localhost:9000/api/v1/tasks`, {
+      return fetch(`http://localhost:3001/api/v1/tasks`, {
           method: 'POST',
           headers: {Accept: 'application/json',
           'Content-Type': 'application/json'
@@ -207,7 +230,7 @@ export const addReading = (reading) => {
 
     export const patchTask = (task) => {
       return (dispatch) => {
-        return fetch(`http://localhost:9000/api/v1/tasks/${task.id}`, {
+        return fetch(`http://localhost:3001/api/v1/tasks/${task.id}`, {
             method: 'PATCH',
             headers: {Accept: 'application/json',
             'Content-Type': 'application/json'
@@ -233,7 +256,7 @@ export const addReading = (reading) => {
 
       export const deleteTask = (task) => {
         return (dispatch) => {
-          return fetch(`http://localhost:9000/api/v1/tasks/${task.id}`, {
+          return fetch(`http://localhost:3001/api/v1/tasks/${task.id}`, {
               method: 'DELETE',
               headers: {Accept: 'application/json',
               'Content-Type': 'application/json'

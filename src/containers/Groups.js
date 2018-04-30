@@ -5,58 +5,6 @@ import { fetchGroups, addGroup } from '../actions';
 import styled from 'styled-components'
 
 
-class Groups extends Component {
-
-  state = {
-    user_id: this.props.user_id,
-    formModalOpen: false,
-    crop_id: '',
-    germination_days: '',
-    propagation_days: '',
-    production_days: '',
-    expected_harvest_lbs: '',
-    trays: '',
-    location: ''
-
-  }
-
-  // componentDidMount(){
-  //   this.props.fetchGroups(this.props.user_id)
-  // }
-
-  shouldComponentUpdate(nextProps, nextState){
-    return (this.state.user_id === nextState.user_id)
-  }
-
-  handleClick(group){
-    this.props.history.push(`/groups/${group.id}`);
-  }
-
-  handleModalFormOpen = () => this.setState({formModalOpen: true})
-
-  handleModalFormClose = (e) => {
-    this.setState({formModalOpen: false})
-    if (this.state.crop === '' || this.state.germination_days === '' || this.state.propagation_days === '' || this.state.production_days === '' || this.state.expected_harvest_lbs === '' || this.state.trays === '' || this.state.location === ''){
-      this.render()
-    } else {
-      this.handleSubmit(e)
-    }
-  }
-
-  handleSubmit = (e) => {
-    this.props.addGroup(this.state)
-  }
-
-
-  handleCropSelection = (e) => {
-    this.setState({crop_id: e.target.value})
-  }
-
-  handleChange = (e) => this.setState({
-    [e.target.name]: e.target.value
-  })
-
-  render(){
 
     const ColumnLabel = styled.label`
       font-family: Helvetica !important;
@@ -88,14 +36,70 @@ class Groups extends Component {
       color: black !important
     `
 
-    const groups = this.props.groups.map((group) => {
+class Groups extends Component {
+
+  state = {
+    user_id: this.props.user_id,
+    formModalOpen: false,
+    crop_id: '',
+    germination_days: '',
+    propagation_days: '',
+    production_days: '',
+    expected_harvest_lbs: '',
+    trays: '',
+    location: ''
+
+  }
+
+  handleClick(group){
+    this.props.history.push(`/groups/${group.id}`);
+  }
+
+  handleModalFormOpen = () => this.setState({formModalOpen: true})
+
+  handleModalFormClose = (e) => {
+    this.setState({formModalOpen: false})
+    if (this.state.crop === '' || this.state.germination_days === '' || this.state.propagation_days === '' || this.state.production_days === '' || this.state.expected_harvest_lbs === '' || this.state.trays === '' || this.state.location === ''){
+      this.render()
+    } else {
+      this.handleSubmit(e)
+    }
+  }
+
+  handleSubmit = (e) => {
+    this.props.addGroup(this.state)
+  }
+
+
+  handleCropSelection = (e) => {
+    this.setState({crop_id: e.target.value})
+  }
+
+  handleLocationSelection = (e) => {
+    this.setState({location: e.target.value})
+  }
+
+  handleChange = (e) => this.setState({
+    [e.target.name]: e.target.value
+  })
+
+  render(){
+
+
+    const groups = this.props.groups.sort((a,b) => a.id - b.id).map((group) => {
       return <Table.Row onClick={() => this.handleClick(group)} key={group.id}><Table.Cell><RowLabel>{group.id}</RowLabel></Table.Cell><Table.Cell><RowLabel>{group.seed_date.split('T')[0]}</RowLabel></Table.Cell><Table.Cell><RowLabel>{group.crop_name}</RowLabel></Table.Cell><Table.Cell><RowLabel>{group.crop_group}</RowLabel></Table.Cell></Table.Row>
     })
     const crops = this.props.crops.map((crop) => {
       return <option key={crop.id} name='crop_id' value={crop.id}><FormLabel>{crop.name}</FormLabel></option>
     })
 
-    console.log(this.state)
+    const locations = ['New York, NY', 'Chicago, IL', 'Los Angeles, CA', 'San Francisco, CA', 'London, UK']
+
+    const locationOptions = locations.map((location) => {
+      return <option key={locations.indexOf(location)} name='location' value={location}><FormLabel>{location}</FormLabel></option>
+    })
+
+    console.log(this.state.user_id)
     return (
 
       <Container>
@@ -143,7 +147,9 @@ class Groups extends Component {
                  <br></br>
                  <br></br>
                  <label><FormLabel>Location:</FormLabel></label>
-                 <input width={4}  type='text' name='location' onChange={this.handleChange} />
+                 <br></br>
+                 <br></br>
+                 <select onChange={this.handleLocationSelection}>{locationOptions}</select>
 
 
            </Form>

@@ -5,6 +5,52 @@ import styled from 'styled-components'
 import { addReading } from '../actions';
 import NutrientBubbleChart from './NutrientBubbleChart'
 
+
+const HeaderLabel = styled.label`
+  font-family: Helvetica !important;
+  font-size: 14px !important;
+  color: grey !important
+`
+const SmallLabel = styled.label`
+  font-family: Helvetica !important;
+  font-size: 10px !important;
+  color: black !important
+`
+const BoldLabel = styled.label`
+  font-family: Helvetica !important;
+  font-size: 15px !important;
+  font-weight: bold !important;
+`
+
+const DataLabel = styled.label`
+  font-family: Helvetica !important;
+  font-size: 50px !important;
+`
+
+const UnitLabel = styled.label`
+  font-family: Helvetica !important;
+  font-size: 20px !important;
+`
+
+const SubHeaderLabel = styled.label`
+  font-family: Helvetica !important;
+  font-size: 10px !important;
+`
+
+const ModalHeadingLabel = styled.label`
+font-family: Helvetica !important;
+font-size: 14px !important;
+font-weight: bold;
+color: black !important;
+`
+
+const FormLabel = styled.label`
+font-family: Helvetica !important;
+font-size: 12px !important;
+color: black !important
+`
+
+
 class NutrientsPanel extends Component {
 
   state = {
@@ -61,51 +107,6 @@ class NutrientsPanel extends Component {
    let datetime = new Date ()
    let date = datetime.toDateString()
    let time = datetime.toTimeString().split(' ')[0].split(':').slice(0,2).join(':')
-   const HeaderLabel = styled.label`
-     font-family: Helvetica !important;
-     font-size: 14px !important;
-     color: grey !important
-   `
-   const SmallLabel = styled.label`
-     font-family: Helvetica !important;
-     font-size: 10px !important;
-     color: black !important
-   `
-   const BoldLabel = styled.label`
-     font-family: Helvetica !important;
-     font-size: 15px !important;
-     font-weight: bold !important;
-   `
-
-   const DataLabel = styled.label`
-     font-family: Helvetica !important;
-     font-size: 50px !important;
-   `
-
-   const UnitLabel = styled.label`
-     font-family: Helvetica !important;
-     font-size: 20px !important;
-   `
-
-   const SubHeaderLabel = styled.label`
-     font-family: Helvetica !important;
-     font-size: 10px !important;
-   `
-
-   const ModalHeadingLabel = styled.label`
-   font-family: Helvetica !important;
-   font-size: 14px !important;
-   font-weight: bold;
-   color: black !important;
-   `
-
-   const FormLabel = styled.label`
-   font-family: Helvetica !important;
-   font-size: 12px !important;
-   color: black !important
-   `
-
-
 
    return (
      <Container>

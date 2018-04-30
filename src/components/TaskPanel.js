@@ -7,6 +7,42 @@ import moment from 'moment';
 import { addTask, patchTask, deleteTask } from '../actions';
 import 'react-datepicker/dist/react-datepicker.css';
 
+    const HeaderLabel = styled.label`
+      font-family: Helvetica !important;
+      font-size: 14px !important;
+      color: grey !important
+    `
+    const ActivityLabel = styled.label`
+      font-family: Helvetica !important;
+      font-size: 12px !important;
+      color: black !important
+    `
+
+    const AddTaskLabel = styled.label`
+      font-family: Helvetica !important;
+      font-size: 10px !important;
+    `
+
+    const ModalHeadingLabel = styled.label`
+      font-family: Helvetica !important;
+      font-size: 14px !important;
+      font-weight: bold;
+      color: black !important;
+    `
+
+    const FormLabel = styled.label`
+      font-family: Helvetica !important;
+      font-size: 12px !important;
+      color: black !important;
+    `
+
+
+    const SmallLabel = styled.label`
+      font-family: Helvetica !important;
+      font-size: 10px !important;
+      color: black !important
+    `
+
 class TaskPanel extends Component {
 
   state = {
@@ -39,7 +75,7 @@ class TaskPanel extends Component {
     })
   }
 
-  handleModalFormClose = (e) => {
+  handleModalFormSubmit = (e) => {
       if (this.state.content === ''){
         this.handleModalClose()
       } else {
@@ -62,42 +98,7 @@ class TaskPanel extends Component {
     let today = new Date ()
     let date = today.toDateString()
     let time = today.toTimeString().split(' ')[0].split(':').slice(0,2).join(':')
-    console.log(this.state)
-    const HeaderLabel = styled.label`
-      font-family: Helvetica !important;
-      font-size: 14px !important;
-      color: grey !important
-    `
-    const ActivityLabel = styled.label`
-      font-family: Helvetica !important;
-      font-size: 12px !important;
-      color: black !important
-    `
 
-    const AddTaskLabel = styled.label`
-      font-family: Helvetica !important;
-      font-size: 10px !important;
-    `
-
-    const ModalHeadingLabel = styled.label`
-      font-family: Helvetica !important;
-      font-size: 14px !important;
-      font-weight: bold;
-      color: black !important;
-    `
-
-    const FormLabel = styled.label`
-      font-family: Helvetica !important;
-      font-size: 12px !important;
-      color: black !important
-    `
-
-
-    const SmallLabel = styled.label`
-      font-family: Helvetica !important;
-      font-size: 10px !important;
-      color: black !important
-    `
 
     const listItems = this.props.data.tasks.filter(task => task.done === false).sort((a,b) => {
       let c = new Date(a.due)
@@ -140,7 +141,6 @@ class TaskPanel extends Component {
                   </List.Item>
     })
 
-    console.log(listItems)
     return (
 
       <Container>
@@ -149,7 +149,7 @@ class TaskPanel extends Component {
         <Modal
             trigger={<AddTaskLabel onClick={this.handleModalFormOpen}>Add Task</AddTaskLabel>}
             open={this.state.formModalOpen}
-            size='small'
+            size='mini'
         >
         <Icon name='close' onClick={this.handleModalClose}/>
         <Modal.Content>
@@ -165,7 +165,6 @@ class TaskPanel extends Component {
 
              <label><FormLabel>Due Date:</FormLabel></label>
              <DatePicker
-
                placeholderText={this.state.due.toString()}
                onChange={this.handleDateChange}
               />
@@ -178,7 +177,7 @@ class TaskPanel extends Component {
          </Form>
          </Modal.Content>
          <Modal.Actions>
-           <Button color='green' type='submit' onClick={this.handleModalFormClose}>
+           <Button color='green' type='submit' onClick={this.handleModalFormSubmit}>
            <SmallLabel>ENTER</SmallLabel>
            </Button>
          </Modal.Actions>
@@ -209,7 +208,7 @@ export default connect(mapStateToProps, { addTask, patchTask, deleteTask }) (Tas
 // <Modal
 //    trigger={<SubHeaderLabel onClick={this.handleModalFormOpen}> Add Reading</SubHeaderLabel>}
 //    open={this.state.formModalOpen}
-//    onClose={this.handleModalFormClose}
+//    onClose={this.handleModalFormSubmit}
 //    size='mini'
 //    closeIcon
 //  >
@@ -233,7 +232,7 @@ export default connect(mapStateToProps, { addTask, patchTask, deleteTask }) (Tas
 //  </Form>
 //  </Modal.Content>
 //  <Modal.Actions>
-//    <Button color='green' type='submit' onClick={this.handleModalFormClose}>
+//    <Button color='green' type='submit' onClick={this.handleModalFormSubmit}>
 //    <SmallLabel>ENTER</SmallLabel>
 //    </Button>
 //  </Modal.Actions>

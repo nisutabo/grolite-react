@@ -4,6 +4,13 @@ import {connect} from 'react-redux'
 import styled from 'styled-components'
 import { Container } from 'semantic-ui-react';
 
+
+const RowLabel = styled.label`
+  font-family: Helvetica-Light !important;
+  font-size: 12px !important;
+  color: black !important
+`
+
 class Signup extends React.Component {
   state = {
     username: "",
@@ -21,11 +28,7 @@ class Signup extends React.Component {
   }
 
   render(){
-    const RowLabel = styled.label`
-      font-family: Helvetica-Light !important;
-      font-size: 12px !important;
-      color: black !important
-    `
+
     return (
       <Container textAlign='center'>
         <label><RowLabel>Username:</RowLabel></label>

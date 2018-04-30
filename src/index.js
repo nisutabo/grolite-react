@@ -10,6 +10,7 @@ import manageGreenhouse from './reducers/manageGreenhouse'
 import manageUsers from './reducers/manageUsers'
 import thunk from 'redux-thunk';
 
+
 const rootReducer = combineReducers({users: manageUsers, greenhouse: manageGreenhouse})
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

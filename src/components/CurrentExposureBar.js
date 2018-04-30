@@ -1,83 +1,140 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Statistic, Grid } from 'semantic-ui-react';
+import { Statistic, Grid, Popup } from 'semantic-ui-react';
 import styled from 'styled-components'
+import { Icon } from '@blueprintjs/core';
+
+const DataLabel = styled.label`
+  font-family: Helvetica !important;
+  font-size: 45px !important;
+`
+const UnitLabel = styled.label`
+  font-family: Helvetica !important;
+  font-size: 40px !important;
+`
+const MolLabel = styled.label`
+  font-family: Helvetica !important;
+  font-size: 12px !important;
+`
+const TrackerLabel = styled.label`
+  font-family: Helvetica !important;
+  font-size: 12px !important;
+  text-align: center !important;
+`
+
+const HeaderLabel = styled.label`
+  font-family: Helvetica !important;
+  font-size: 13px !important;
+  text-align: left !important;
+`
+
 
 class CurrentExposureBar extends Component {
 
-
   render(){
-
-    const DataLabel = styled.label`
-      font-family: Helvetica !important;
-      font-size: 50px !important;
-    `
-
-    const UnitLabel = styled.label`
-      font-family: Helvetica !important;
-      font-size: 40px !important;
-    `
-
-
-    const MolLabel = styled.label`
-      font-family: Helvetica !important;
-      font-size: 11px !important;
-    `
 
     let currentTemp = this.props.data.current_temp
     let optimalTempDay = this.props.crop.temp_day
+    let minimumTempDay = this.props.crop.temp_day_min
     let optimalTempNight = this.props.crop.temp_night
-    let currentHumidity = this.props.data.current_humidity.split('')[0] + this.props.data.current_humidity.split('')[1]
+    let minimumTempNight = this.props.crop.temp_night_min
+    let currentHumidity = this.props.data.current_humidity
     let optimalHumidityMax = this.props.crop.maxhumidity
     let optimalHumidityMin = this.props.crop.minhumidity
     let dli = this.props.data.dli
+    let minimumDli = this.props.crop.dli_min
     let optimalDli = this.props.crop.dli
     let currentHour = parseInt(this.props.data.current_time.split(':')[0], 10)
     let sunset = parseInt(this.props.data.sunset, 10)
     let sunrise = parseInt(this.props.data.sunrise, 10)
+    let isDay = () => ((currentHour < sunset) && (currentHour > sunrise))
+
     const tempDelta = () => {
-        if ((currentHour < sunset) && (currentHour > sunrise)){
-          return Math.round(currentTemp - optimalTempDay)
+        if (isDay()){
+          if ((currentTemp <= optimalTempDay) && (currentTemp >= minimumTempDay)){
+            return `Within Ideal Range (${minimumTempDay}\xB0F - ${optimalTempDay}\xB0F)`
+          } else if ((currentTemp < minimumTempDay)) {
+            return `${Math.round(minimumTempDay - currentTemp)}\xB0F below daytime temperature floor (${minimumTempDay}\xB0F)`
+          } else if ((currentTemp > optimalTempDay)) {
+            return `${Math.round(currentTemp - optimalTempDay)}\xB0F above optimal daytime temperature (${optimalTempDay}\xB0F)`
+          }
         } else {
-          return Math.round(currentTemp - optimalTempNight)
+          if ((currentTemp < optimalTempNight) && (currentTemp > minimumTempNight)){
+            return `Within Ideal Range (${minimumTempNight}\xB0F - ${optimalTempNight}\xB0F)`
+          } else if ((currentTemp < minimumTempNight)) {
+            return `${Math.round(minimumTempNight - currentTemp)}\xB0F below nightime temperature floor (${minimumTempNight}\xB0F)`
+          } else if ((currentTemp > optimalTempNight)) {
+            return `${Math.round(currentTemp - optimalTempNight)}\xB0F above optimal nightime temperature (${optimalTempNight}\xB0F)`
+          }
         }
     }
+
     const humidityDelta = () => {
         if (parseInt(currentHumidity, 10) > optimalHumidityMax){
-          return Math.round(parseInt(currentHumidity, 10) - optimalHumidityMax)
+          return `${Math.round(parseInt(currentHumidity, 10) - optimalHumidityMax)}% above humidity ceiling (${optimalHumidityMax}%)`
+        } else if ((parseInt(currentHumidity, 10) <= optimalHumidityMax) && (parseInt(currentHumidity, 10) >= optimalHumidityMin)) {
+          return `Within Ideal Range (${optimalHumidityMin}% - ${optimalHumidityMax}%)`
         } else {
-          return Math.round(parseInt(currentHumidity, 10) - optimalHumidityMin)
+          return `${optimalHumidityMin - Math.round(parseInt(currentHumidity, 10))}% below humidity floor (${optimalHumidityMin}%)`
         }
     }
+
     const dliDelta = () => {
-        return parseInt((dli - optimalDli), 10)
+        if ((dli <= optimalDli) && (dli >= minimumDli)){
+          return `Within Ideal Range (${minimumDli} mol m\u207B\u00B2 d\u207B\u00B9 - ${optimalDli} mol m\u207B\u00B2 d\u207B\u00B9)`
+        } else if (dli > optimalDli) {
+          return `${Math.round(dli - optimalDli)} mol m\u207B\u00B2 d\u207B\u00B9 above optimal daily light integral (${optimalDli} mol m\u207B\u00B2 d\u207B\u00B9)`
+        } else if (dli < minimumDli) {
+          return `${Math.round(minimumDli - dli)} mol m\u207B\u00B2 d\u207B\u00B9 below DLI floor (${minimumDli} mol m\u207B\u00B2 d\u207B\u00B9)`
+        }
     }
+
+    const status = (string) => {
+      if (string.includes('Within Ideal Range')){
+        return <Icon iconSize={18} icon='thumbs-up' color='green'/>
+      } else {
+        return <Icon iconSize={18} icon='warning-sign' color='red' />
+      }
+    }
+
     let tempUnit = '\xB0F'
     let humidityUnit = '%'
     let dliUnit = 'mol'
     return (
-      <Grid columns={3}>
-        <Grid.Row>
-          <Grid.Column >
+      <Grid stackable stretched columns={3}>
+        <Grid.Row >
+          <Grid.Column>
+          <Grid.Row>
           <Statistic>
-            <div>Current Temperature: </div>
+            <HeaderLabel>Current Temperature: </HeaderLabel>
             <Statistic.Value><DataLabel>{currentTemp}</DataLabel><UnitLabel>{tempUnit}</UnitLabel></Statistic.Value>
-            {tempDelta()}
           </Statistic>
+          </Grid.Row >
+          <Grid.Row>
+          <TrackerLabel><Popup  hideOnScroll trigger={<Icon iconSize={11} color='grey' icon='maximize' />} header={status(tempDelta())} content={tempDelta()}/></TrackerLabel>
+          </Grid.Row>
           </Grid.Column>
-          <Grid.Column >
+          <Grid.Column>
+          <Grid.Row>
           <Statistic>
-            <div>Current Humidity: </div>
+            <HeaderLabel>Current Humidity: </HeaderLabel>
             <Statistic.Value><DataLabel>{currentHumidity}</DataLabel><UnitLabel>{humidityUnit}</UnitLabel></Statistic.Value>
-            {humidityDelta()}
           </Statistic>
+          </Grid.Row>
+          <Grid.Row>
+          <TrackerLabel><Popup  hideOnScroll trigger={<Icon iconSize={11} color='grey' icon='maximize' />} header={status(humidityDelta())} content={humidityDelta()}/></TrackerLabel>
+          </Grid.Row>
           </Grid.Column>
-          <Grid.Column verticalAlign='middle'>
+          <Grid.Column>
+          <Grid.Row>
           <Statistic>
-            <div>DLI (Expected): </div>
+            <HeaderLabel>DLI (Today): </HeaderLabel>
             <Statistic.Value><DataLabel>{dli}</DataLabel><MolLabel> {dliUnit} m<sup>-2</sup> d<sup>-1</sup></MolLabel></Statistic.Value>
-            {dliDelta()}
           </Statistic>
+          </Grid.Row>
+          <Grid.Row>
+          <TrackerLabel><Popup  hideOnScroll trigger={<Icon iconSize={11} color='grey' icon='maximize' />} header={status(dliDelta())} content={dliDelta()}/></TrackerLabel>
+          </Grid.Row>
           </Grid.Column>
         </Grid.Row>
       </Grid>
