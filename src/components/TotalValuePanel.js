@@ -1,32 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container } from 'semantic-ui-react';
-import { Doughnut, Chart } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 //import styled from 'styled-components';
 
 
-// the next 20 lines are simply for adding text inside doughnut chart
-const originalDoughnutDraw = Chart.controllers.doughnut.prototype.draw;
-Chart.helpers.extend(Chart.controllers.doughnut.prototype, {
-  draw: function() {
-    originalDoughnutDraw.apply(this, arguments);
 
-    const chart = this.chart.chart;
-    const ctx = chart.ctx;
-    const width = chart.width;
-    const height = chart.height;
-
-    const fontSize = (height / 114).toFixed(2);
-    ctx.font = fontSize + "em Helvetica";
-    ctx.textBaseline = "middle";
-
-    const text = chart.config.data.text,
-        textX = Math.round((width - ctx.measureText(text).width) / 1.96),
-        textY = height / 1.82;
-
-    ctx.fillText(text, textX, textY);
-  }
-});
 
 class TotalValuePanel extends Component {
 
@@ -42,6 +21,7 @@ class TotalValuePanel extends Component {
       if (!cropNames.includes(group.crop_name)){
         cropNames.push(group.crop_name);
       }
+      return null
     })
     result[0] = cropNames;
     cropNames.forEach(crop => {
@@ -58,7 +38,6 @@ class TotalValuePanel extends Component {
   }
 
   render(){
-console.log(this.props.groups)
     const data = {
     	labels: this.groupCategories()[0],
     	datasets: [{
@@ -97,3 +76,28 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps)(TotalValuePanel)
+
+
+
+// the next 20 lines are simply for adding text inside doughnut chart
+// const originalDoughnutDraw = Chart.controllers.doughnut.prototype.draw;
+// Chart.helpers.extend(Chart.controllers.doughnut.prototype, {
+//   draw: function() {
+//     originalDoughnutDraw.apply(this, arguments);
+//
+//     const chart = this.chart.chart;
+//     const ctx = chart.ctx;
+//     const width = chart.width;
+//     const height = chart.height;
+//
+//     const fontSize = (height / 114).toFixed(2);
+//     ctx.font = fontSize + "em Helvetica";
+//     ctx.textBaseline = "middle";
+//
+//     const text = chart.config.data.text,
+//         textX = Math.round((width - ctx.measureText(text).width) / 1.96),
+//         textY = height / 1.82;
+//
+//     ctx.fillText(text, textX, textY);
+//   }
+// });

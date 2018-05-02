@@ -41,13 +41,13 @@ class Groups extends Component {
   state = {
     user_id: this.props.user_id,
     formModalOpen: false,
-    crop_id: '',
+    crop_id: '1',
     germination_days: '',
     propagation_days: '',
     production_days: '',
     expected_harvest_lbs: '',
     trays: '',
-    location: ''
+    location: 'New York, NY'
 
   }
 
@@ -166,7 +166,7 @@ class Groups extends Component {
           <Table basic='very' compact celled striped selectable>
            <Table.Body>
              <Table.Row>
-               <Table.Cell textAlign='left'><ColumnLabel>ID</ColumnLabel></Table.Cell>
+               <Table.Cell textAlign='left'><ColumnLabel>IDN</ColumnLabel></Table.Cell>
                <Table.Cell textAlign='left'><ColumnLabel>SEED DATE</ColumnLabel></Table.Cell>
                <Table.Cell textAlign='left'><ColumnLabel>FRUIT</ColumnLabel></Table.Cell>
                <Table.Cell textAlign='left'><ColumnLabel>CATEGORY</ColumnLabel></Table.Cell>

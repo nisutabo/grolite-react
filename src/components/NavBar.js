@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { logOut } from '../actions';
 
 const NavLabel = styled.label`
-  font-family: Helvetica !important;
+  font-family: Helvetica-Light !important;
   font-size: 16px !important;
   color: black !important;
   padding-right: 20px !important;
