@@ -11,10 +11,17 @@ const RowLabel = styled.label`
   color: black !important
 `
 
+const FormLabel = styled.label`
+  font-family: Helvetica !important;
+  font-size: 12px !important;
+  color: black !important
+`
+
 class Signup extends React.Component {
   state = {
     username: "",
     password: "",
+    location: ""
   }
 
   handleChange = (event)=> {
@@ -24,10 +31,21 @@ class Signup extends React.Component {
   }
 
   handleSubmit = (event) => {
-    this.props.signUp(this.state.username, this.state.password, this.props.history)
+    this.props.signUp(this.state.username, this.state.password, this.state.location, this.props.history)
   }
 
+  handleLocationSelection = (e) => {
+    this.setState({location: e.target.value})
+  }
+
+
   render(){
+
+    const locations = ['New York, NY', 'Chicago, IL', 'Los Angeles, CA', 'San Francisco, CA', 'London, UK']
+
+    const locationOptions = locations.map((location) => {
+      return <option key={locations.indexOf(location)} name='location' value={location}><FormLabel>{location}</FormLabel></option>
+    })
 
     return (
       <Container textAlign='center'>
@@ -41,6 +59,12 @@ class Signup extends React.Component {
         <br></br>
         <br></br>
         <input name="password" type='password' value={this.state.password} onChange={this.handleChange}/>
+        <br></br>
+        <br></br>
+        <label><FormLabel>Location:</FormLabel></label>
+        <br></br>
+        <br></br>
+        <select onChange={this.handleLocationSelection}>{locationOptions}</select>
         <br></br>
         <br></br>
         <button onClick={this.handleSubmit}><RowLabel>Sign Up!</RowLabel></button>

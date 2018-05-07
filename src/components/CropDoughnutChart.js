@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container } from 'semantic-ui-react';
+import { Container, Dropdown } from 'semantic-ui-react';
 import { Doughnut } from 'react-chartjs-2';
-//import styled from 'styled-components';
+import styled from 'styled-components';
 
 
+const HeaderLabel = styled.label`
+  font-family: Helvetica !important;
+  font-size: 18px !important;
+  color: grey !important
+`
 
-
-class TotalValuePanel extends Component {
+class CropDoughnutChart extends Component {
 
   state = {
-
+    byCount: true
   }
+
+  handleChange = (e, { value }) => this.setState({ byCount: value })
 
   groupCategories = () => {
     let result = [];
     let cropNames = [];
     let groupCounts = [];
+    let groupValues = [];
     this.props.groups.map(group => {
       if (!cropNames.includes(group.crop_name)){
         cropNames.push(group.crop_name);
@@ -24,6 +31,7 @@ class TotalValuePanel extends Component {
       return null
     })
     result[0] = cropNames;
+    this.state.byCount === true ? //if user wants to see number of groups per crop
     cropNames.forEach(crop => {
       let count = 0;
       this.props.groups.forEach(group => {
@@ -32,7 +40,20 @@ class TotalValuePanel extends Component {
         }
       })
       groupCounts.push(count);
-      result[1] = groupCounts
+      result[1] = groupCounts;
+    })
+    : // if user wants to see total value per crop
+    cropNames.forEach(crop => {
+      let totalValue = 0;
+      let cropValue = this.props.crops.find(c => c.name === crop).market_value;
+      this.props.groups.forEach(group => {
+        if (group.crop_name === crop){
+          totalValue += (group.expected_harvest_lbs * cropValue);
+        }
+      })
+      groupValues.push(totalValue);
+      result[1] = groupValues;
+
     })
     return result
   }
@@ -56,9 +77,32 @@ class TotalValuePanel extends Component {
       text: '23%'
     };
 
+    const optionValues = {
+      legend: {
+        display: true,
+        position: 'right',
+        labels: {
+          fontSize: 12,
+          boxWidth: 10
+        }
+      },
+      cutoutPercentage: 70
+    }
+
     return (
       <Container>
-        <Doughnut data={data} />
+        <HeaderLabel>CROPS</HeaderLabel>
+        <br></br>
+        <br></br>
+        <Doughnut data={data} options={optionValues} />
+        <br></br>
+        <br></br>
+        <span>
+           SORT BY
+          {' '}
+          <br></br>
+          <Dropdown inline onChange={this.handleChange} options={[{text: 'VALUE PER CROP (USD)', value: false}, {text: 'GROUP COUNT PER CROP', value: true}]} defaultValue={true} />
+        </span>
       </Container>
     )
   }
@@ -75,7 +119,7 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps)(TotalValuePanel)
+export default connect(mapStateToProps)(CropDoughnutChart)
 
 
 

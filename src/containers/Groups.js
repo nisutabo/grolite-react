@@ -47,7 +47,7 @@ class Groups extends Component {
     production_days: '',
     expected_harvest_lbs: '',
     trays: '',
-    location: 'New York, NY'
+    location: this.props.location
 
   }
 
@@ -75,9 +75,7 @@ class Groups extends Component {
     this.setState({crop_id: e.target.value})
   }
 
-  handleLocationSelection = (e) => {
-    this.setState({location: e.target.value})
-  }
+
 
   handleChange = (e) => this.setState({
     [e.target.name]: e.target.value
@@ -93,13 +91,6 @@ class Groups extends Component {
       return <option key={crop.id} name='crop_id' value={crop.id}><FormLabel>{crop.name}</FormLabel></option>
     })
 
-    const locations = ['New York, NY', 'Chicago, IL', 'Los Angeles, CA', 'San Francisco, CA', 'London, UK']
-
-    const locationOptions = locations.map((location) => {
-      return <option key={locations.indexOf(location)} name='location' value={location}><FormLabel>{location}</FormLabel></option>
-    })
-
-    console.log(this.state.user_id)
     return (
 
       <Container>
@@ -146,10 +137,7 @@ class Groups extends Component {
                  <input width={4}  type='number' name='trays' onChange={this.handleChange} />
                  <br></br>
                  <br></br>
-                 <label><FormLabel>Location:</FormLabel></label>
-                 <br></br>
-                 <br></br>
-                 <select onChange={this.handleLocationSelection}>{locationOptions}</select>
+
 
 
            </Form>
@@ -188,7 +176,8 @@ const mapStateToProps = (state) => {
   return {
           crops: state.greenhouse.crops,
           groups: state.greenhouse.groups,
-          user_id: state.users.currentUser.id
+          user_id: state.users.currentUser.id,
+          location: state.users.currentUser.location
         }
 }
 

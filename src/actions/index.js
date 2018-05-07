@@ -1,4 +1,4 @@
-export function signUp(username, password, history){
+export function signUp(username, password, location, history){
   return function(dispatch){
     fetch("http://localhost:3001/api/v1/signup", {
       method: "POST",
@@ -6,7 +6,7 @@ export function signUp(username, password, history){
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
-      body: JSON.stringify({username,password})
+      body: JSON.stringify({username,password,location})
     })
     .then(res => res.json())
     .then(response => {

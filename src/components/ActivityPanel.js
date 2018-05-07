@@ -166,7 +166,7 @@ class ActivityPanel extends Component {
   }
 
   render (){
-    console.log(this.daysUntilPropagation())
+
     return (
       <Container>
       <HeaderLabel>ACTIVITY</HeaderLabel>
@@ -232,65 +232,3 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, { patchGroup }) (ActivityPanel)
-
-
-
-
-// <Grid columns={3}>
-//     <Grid.Row>
-//       <Grid.Column>
-//         <HeaderLabel>ACTIVITY</HeaderLabel>
-//       </Grid.Column>
-//     </Grid.Row>
-//     <Grid.Row>
-//       <Grid.Column width={2}>
-//         <Container>
-//         <ActivityLabel>Seeded</ActivityLabel>
-//         </Container>
-//       </Grid.Column>
-//       <Grid.Column widht={2}>
-//         <Container textAlign="center">
-//         <ActivityLabel>{this.props.group.seed_date.split('T')[0]}</ActivityLabel>
-//         </Container>
-//       </Grid.Column>
-//       <Grid.Column width={6}>
-//         <Container textAlign="left">
-//         <ActivityLabel>{this.props.data.status[1]} day(s) until Propagation</ActivityLabel>
-//         </Container>
-//       </Grid.Column>
-//     </Grid.Row>
-//     <Grid.Row>
-//       <Grid.Column width={2}>
-//         <Container>
-//         <ActivityLabel>Propagation</ActivityLabel>
-//         </Container>
-//       </Grid.Column>
-//       <Grid.Column widht={2}>
-//         <Container textAlign="center">
-//         <ActivityLabel>{this.props.group.seed_date.split('T')[0]}</ActivityLabel>
-//         </Container>
-//       </Grid.Column>
-//       <Grid.Column width={6}>
-//         <Container textAlign="left">
-//         <ActivityLabel>{this.props.data.status[1] + this.props.group.propagation_days} day(s) until Production</ActivityLabel>
-//         </Container>
-//       </Grid.Column>
-//     </Grid.Row>
-//     <Grid.Row>
-//       <Grid.Column width={2}>
-//         <Container>
-//         <ActivityLabel>Propagation</ActivityLabel>
-//         </Container>
-//       </Grid.Column>
-//       <Grid.Column widht={2}>
-//         <Container textAlign="center">
-//         <ActivityLabel>{this.props.group.seed_date.split('T')[0]}</ActivityLabel>
-//         </Container>
-//       </Grid.Column>
-//       <Grid.Column width={6}>
-//         <Container textAlign="left">
-//         <ActivityLabel>{this.props.data.status[1] + this.props.group.production_days} day(s) until Harvest</ActivityLabel>
-//         </Container>
-//       </Grid.Column>
-//     </Grid.Row>
-//   </Grid>

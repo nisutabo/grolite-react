@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
 import { Grid, Divider, Container } from 'semantic-ui-react';
-//import { connect } from 'react-redux';
-//import styled from 'styled-components';
-import TotalValuePanel from '../components/TotalValuePanel';
+import CropDoughnutChart from '../components/CropDoughnutChart';
 import SchedulePanel from '../components/SchedulePanel';
+import ActivityDoughnutChart from '../components/ActivityDoughnutChart';
 
 
 export default class Greenhouse extends Component {
   render(){
     return(
       <Container>
-        <Grid columns={2} divided padded='horizontally'>
+        <Grid columns={2} divided >
           <Grid.Row height={20}>
             <Grid.Column width={8}>
-              <TotalValuePanel />
+              <CropDoughnutChart />
             </Grid.Column>
-            <Divider />
+              <Divider />
             <Grid.Column width={8}>
-
+              <ActivityDoughnutChart />
             </Grid.Column>
-          </Grid.Row>
-          <Divider />
+            </Grid.Row>
+            <Divider />
           <Grid.Row>
-            <SchedulePanel />
+              <SchedulePanel history={this.props.history}/>
           </Grid.Row>
         </Grid>
       </Container>

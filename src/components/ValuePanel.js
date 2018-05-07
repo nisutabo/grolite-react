@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Table } from 'semantic-ui-react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 
     const HeaderLabel = styled.label`
@@ -16,7 +16,7 @@ import styled from 'styled-components'
     `
 
 class ValuePanel extends Component {
-  
+
   render (){
 
     let value = this.props.group.expected_harvest_lbs * this.props.crop.market_value

@@ -111,7 +111,7 @@ class CurrentExposureBar extends Component {
           </Statistic>
           </Grid.Row >
           <Grid.Row>
-          <TrackerLabel><Popup  hideOnScroll trigger={<Icon iconSize={11} color='grey' icon='maximize' />} header={status(tempDelta())} content={tempDelta()}/></TrackerLabel>
+          <TrackerLabel><Popup hideOnScroll trigger={<Icon iconSize={11} color='grey' icon='maximize' />} header={status(tempDelta())} content={tempDelta()}/></TrackerLabel>
           </Grid.Row>
           </Grid.Column>
           <Grid.Column>
@@ -122,7 +122,7 @@ class CurrentExposureBar extends Component {
           </Statistic>
           </Grid.Row>
           <Grid.Row>
-          <TrackerLabel><Popup  hideOnScroll trigger={<Icon iconSize={11} color='grey' icon='maximize' />} header={status(humidityDelta())} content={humidityDelta()}/></TrackerLabel>
+          <TrackerLabel><Popup hideOnScroll trigger={<Icon iconSize={11} color='grey' icon='maximize' />} header={status(humidityDelta())} content={humidityDelta()}/></TrackerLabel>
           </Grid.Row>
           </Grid.Column>
           <Grid.Column>
@@ -133,7 +133,7 @@ class CurrentExposureBar extends Component {
           </Statistic>
           </Grid.Row>
           <Grid.Row>
-          <TrackerLabel><Popup  hideOnScroll trigger={<Icon iconSize={11} color='grey' icon='maximize' />} header={status(dliDelta())} content={dliDelta()}/></TrackerLabel>
+          <TrackerLabel><Popup hideOnScroll trigger={<Icon iconSize={11} color='grey' icon='maximize' />} header={status(dliDelta())} content={dliDelta()}/></TrackerLabel>
           </Grid.Row>
           </Grid.Column>
         </Grid.Row>

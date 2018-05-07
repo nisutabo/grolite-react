@@ -7,7 +7,7 @@ import { logOut } from '../actions';
 
 const NavLabel = styled.label`
   font-family: Helvetica-Light !important;
-  font-size: 16px !important;
+  font-size: 14px !important;
   color: black !important;
   padding-right: 20px !important;
   padding-left: 20px !important;

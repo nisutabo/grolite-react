@@ -107,18 +107,3 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps) (StatusPanel)
-
-
-
-// <Grid.Row>
-//   <Grid.Column>
-//   <Container textAlign='center'>
-//     <SmallLabel> Desired Acidity Level: </SmallLabel><BoldLabel>{this.props.crop.ph}</BoldLabel><SmallLabel> pH </SmallLabel>
-//   </Container>
-//   </Grid.Column>
-//   <Grid.Column>
-//   <Container textAlign='left'>
-//     <SmallLabel> Desired Nutrient Level: </SmallLabel><BoldLabel>{this.props.crop.ec}</BoldLabel><SmallLabel> EC </SmallLabel>
-//   </Container>
-//   </Grid.Column>
-// </Grid.Row>
