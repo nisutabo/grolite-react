@@ -52,40 +52,40 @@ class CurrentExposureBar extends Component {
     const tempDelta = () => {
         if (isDay()){
           if ((currentTemp <= optimalTempDay) && (currentTemp >= minimumTempDay)){
-            return `Within Ideal Range (${minimumTempDay}\xB0F - ${optimalTempDay}\xB0F)`
+            return `Within Ideal Range (${minimumTempDay}\xB0F - ${optimalTempDay}\xB0F) for ${this.props.crop.name}`
           } else if ((currentTemp < minimumTempDay)) {
-            return `${Math.round(minimumTempDay - currentTemp)}\xB0F below daytime temperature floor (${minimumTempDay}\xB0F)`
+            return `${Math.round(minimumTempDay - currentTemp)}\xB0F below daytime temperature floor (${minimumTempDay}\xB0F) for ${this.props.crop.name}`
           } else if ((currentTemp > optimalTempDay)) {
-            return `${Math.round(currentTemp - optimalTempDay)}\xB0F above optimal daytime temperature (${optimalTempDay}\xB0F)`
+            return `${Math.round(currentTemp - optimalTempDay)}\xB0F above optimal daytime temperature (${optimalTempDay}\xB0F) for ${this.props.crop.name}`
           }
         } else {
           if ((currentTemp < optimalTempNight) && (currentTemp > minimumTempNight)){
-            return `Within Ideal Range (${minimumTempNight}\xB0F - ${optimalTempNight}\xB0F)`
+            return `Within Ideal Range (${minimumTempNight}\xB0F - ${optimalTempNight}\xB0F) for ${this.props.crop.name}`
           } else if ((currentTemp < minimumTempNight)) {
-            return `${Math.round(minimumTempNight - currentTemp)}\xB0F below nightime temperature floor (${minimumTempNight}\xB0F)`
+            return `${Math.round(minimumTempNight - currentTemp)}\xB0F below nightime temperature floor (${minimumTempNight}\xB0F) for ${this.props.crop.name}`
           } else if ((currentTemp > optimalTempNight)) {
-            return `${Math.round(currentTemp - optimalTempNight)}\xB0F above optimal nightime temperature (${optimalTempNight}\xB0F)`
+            return `${Math.round(currentTemp - optimalTempNight)}\xB0F above optimal nightime temperature (${optimalTempNight}\xB0F) for ${this.props.crop.name}`
           }
         }
     }
 
     const humidityDelta = () => {
         if (parseInt(currentHumidity, 10) > optimalHumidityMax){
-          return `${Math.round(parseInt(currentHumidity, 10) - optimalHumidityMax)}% above humidity ceiling (${optimalHumidityMax}%)`
+          return `${Math.round(parseInt(currentHumidity, 10) - optimalHumidityMax)}% above humidity ceiling (${optimalHumidityMax}%) for ${this.props.crop.name}`
         } else if ((parseInt(currentHumidity, 10) <= optimalHumidityMax) && (parseInt(currentHumidity, 10) >= optimalHumidityMin)) {
-          return `Within Ideal Range (${optimalHumidityMin}% - ${optimalHumidityMax}%)`
+          return `Within Ideal Range (${optimalHumidityMin}% - ${optimalHumidityMax}%) for ${this.props.crop.name}`
         } else {
-          return `${optimalHumidityMin - Math.round(parseInt(currentHumidity, 10))}% below humidity floor (${optimalHumidityMin}%)`
+          return `${optimalHumidityMin - Math.round(parseInt(currentHumidity, 10))}% below humidity floor (${optimalHumidityMin}%) for ${this.props.crop.name}`
         }
     }
 
     const dliDelta = () => {
         if ((dli <= optimalDli) && (dli >= minimumDli)){
-          return `Within Ideal Range (${minimumDli} mol m\u207B\u00B2 d\u207B\u00B9 - ${optimalDli} mol m\u207B\u00B2 d\u207B\u00B9)`
+          return `Within Ideal Range (${minimumDli} mol m\u207B\u00B2 d\u207B\u00B9 - ${optimalDli} mol m\u207B\u00B2 d\u207B\u00B9) for ${this.props.crop.name}`
         } else if (dli > optimalDli) {
-          return `${Math.round(dli - optimalDli)} mol m\u207B\u00B2 d\u207B\u00B9 above optimal daily light integral (${optimalDli} mol m\u207B\u00B2 d\u207B\u00B9)`
+          return `${Math.round(dli - optimalDli)} mol m\u207B\u00B2 d\u207B\u00B9 above optimal daily light integral (${optimalDli} mol m\u207B\u00B2 d\u207B\u00B9) for ${this.props.crop.name}`
         } else if (dli < minimumDli) {
-          return `${Math.round(minimumDli - dli)} mol m\u207B\u00B2 d\u207B\u00B9 below DLI floor (${minimumDli} mol m\u207B\u00B2 d\u207B\u00B9)`
+          return `${Math.round(minimumDli - dli)} mol m\u207B\u00B2 d\u207B\u00B9 below DLI floor (${minimumDli} mol m\u207B\u00B2 d\u207B\u00B9) for ${this.props.crop.name}`
         }
     }
 

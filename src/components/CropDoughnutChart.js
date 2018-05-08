@@ -24,11 +24,8 @@ class CropDoughnutChart extends Component {
     let cropNames = [];
     let groupCounts = [];
     let groupValues = [];
-    this.props.groups.map(group => {
-      if (!cropNames.includes(group.crop_name)){
-        cropNames.push(group.crop_name);
-      }
-      return null
+    this.props.crops.forEach(crop => {
+        cropNames.push(crop.name);
     })
     result[0] = cropNames;
     this.state.byCount === true ? //if user wants to see number of groups per crop
@@ -101,7 +98,7 @@ class CropDoughnutChart extends Component {
            SORT BY
           {' '}
           <br></br>
-          <Dropdown inline onChange={this.handleChange} options={[{text: 'VALUE PER CROP (USD)', value: false}, {text: 'GROUP COUNT PER CROP', value: true}]} defaultValue={true} />
+          <Dropdown inline onChange={this.handleChange} options={[{text: 'VALUE PER CROP (USD)', value: false}, {text: 'GROUP COUNT PER CROP', value: true}]} value={this.state.byCount} />
         </span>
       </Container>
     )

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Grid, Divider, Container , Statistic, Modal, Form, Button } from 'semantic-ui-react';
 import styled from 'styled-components'
 import { addReading } from '../actions';
-import NutrientBubbleChart from './NutrientBubbleChart'
+import NutrientLineChart from './NutrientLineChart'
 
 
 const HeaderLabel = styled.label`
@@ -113,16 +113,16 @@ class NutrientsPanel extends Component {
      <HeaderLabel>NUTRIENT LEVEL</HeaderLabel>
      <br></br>
      <Modal
-      trigger={<SubHeaderLabel onClick={this.handleModalChartOpen}>Show Readings</SubHeaderLabel>}
+      trigger={<SubHeaderLabel onClick={this.handleModalChartOpen}>Show History</SubHeaderLabel>}
       open={this.state.chartModalOpen}
       onClose={this.handleModalChartClose}
-      size='mini'
+      size='small'
       closeIcon
       >
       <Modal.Content>
         <ModalHeadingLabel>{this.props.group.crop_name} - {this.props.group.id} - {this.props.group.seed_date.split('T')[0]}</ModalHeadingLabel>
         <Divider />
-        <NutrientBubbleChart />
+        <NutrientLineChart />
       </Modal.Content>
      </Modal> |
      <Modal

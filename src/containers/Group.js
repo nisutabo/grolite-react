@@ -15,6 +15,14 @@ const CustomLabel = styled.label`
   padding-bottom: 30px !important;
 `
 
+const SubLabel = styled.label`
+  font-family: Arial !important;
+  font-size: 13px !important;
+  padding-bottom: 30px !important;
+  font-style: italic;
+  color: black;
+`
+
 class Group extends Component {
 
   componentDidMount(){
@@ -29,7 +37,9 @@ class Group extends Component {
         :<Grid columns={2} divided padded='horizontally'>
           <Grid.Row height={20}>
             <Grid.Column width={8}>
-            <CustomLabel>{this.props.group.crop_name} - {this.props.group.id} - {this.props.group.seed_date.split('T')[0]}</CustomLabel>
+            <CustomLabel>{this.props.group.crop_name}</CustomLabel>
+            <br></br>
+            <SubLabel>ID: {this.props.group.id} - {this.props.group.seed_date.split('T')[0]}</SubLabel>
             <br></br>
             <LineChart />
             <br></br>

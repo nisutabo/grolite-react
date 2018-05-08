@@ -115,7 +115,7 @@ class ActivityDoughnutChart extends Component {
            SORT BY
           {' '}
           <br></br>
-          <Dropdown inline onChange={this.handleChange} options={[{text: 'VALUE PER STAGE (USD)', value: false}, {text: 'GROUP COUNT PER STAGE', value: true}]} defaultValue={true} />
+          <Dropdown inline onChange={this.handleChange} options={[{text: 'VALUE PER STAGE (USD)', value: false}, {text: 'GROUP COUNT PER STAGE', value: true}]} value={this.state.byCount} />
         </span>
       </Container>
     )

@@ -77,7 +77,7 @@ class LineChart extends Component {
         return 'us'
       }
     }
-    const lineValues = {
+    const chartValues = {
 
       labels: hours,
       datasets:
@@ -128,7 +128,7 @@ class LineChart extends Component {
             },
             title: {
               display: true,
-              text: "Today's Exposure"
+              text: "Weather Conditions of the next 36 Hours"
             },
             scales: {
               yAxes: [{
@@ -158,9 +158,9 @@ class LineChart extends Component {
     return (
       <div>
       <br></br>
-      <div>{this.props.group.location} <Flag name={country()} /></div>
+      <div>{this.props.user.location} <Flag name={country()} /></div>
       {this.props.data.current_time}
-        <Bar data={lineValues} height={230} options={chartOptions}/>
+        <Bar data={chartValues} height={230} options={chartOptions}/>
       </div>
     )
   }
@@ -171,7 +171,8 @@ const mapStateToProps = (state) => {
   return {
     data: state.greenhouse.data,
     crop: state.greenhouse.crop,
-    group: state.greenhouse.group
+    group: state.greenhouse.group,
+    user: state.users.currentUser
    }
 }
 

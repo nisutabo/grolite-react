@@ -19,6 +19,7 @@ const GroliteLabel = styled.label`
   color: grey !important;
 `
 
+
 class NavBar extends Component {
 
   render(){

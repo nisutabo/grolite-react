@@ -39,7 +39,12 @@ class ValuePanel extends Component {
               <Table.Cell textAlign='left'><ActivityLabel>{percentage_of_total} % OF FARM</ActivityLabel></Table.Cell>
             </Table.Row>
             <Table.Row>
-              <Table.Cell><ActivityLabel>Value At Risk</ActivityLabel></Table.Cell>
+              <Table.Cell><ActivityLabel>Quantity At Risk to Pests/Disease:</ActivityLabel></Table.Cell>
+              <Table.Cell><ActivityLabel>0 Trays</ActivityLabel></Table.Cell>
+              <Table.Cell textAlign='left'><ActivityLabel>0 lbs.</ActivityLabel></Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell><ActivityLabel>Quantity Disposed:</ActivityLabel></Table.Cell>
               <Table.Cell><ActivityLabel>-</ActivityLabel></Table.Cell>
               <Table.Cell textAlign='left'><ActivityLabel>-</ActivityLabel></Table.Cell>
             </Table.Row>
