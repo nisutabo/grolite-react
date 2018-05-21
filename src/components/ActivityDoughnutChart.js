@@ -105,7 +105,7 @@ class ActivityDoughnutChart extends Component {
 
     return (
       <Container>
-        <HeaderLabel>LIFECYCLE</HeaderLabel>
+        <HeaderLabel>PIPELINE</HeaderLabel>
         <br></br>
         <br></br>
         <Doughnut data={data} options={optionValues} />

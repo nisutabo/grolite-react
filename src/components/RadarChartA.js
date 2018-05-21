@@ -45,7 +45,7 @@ class RadarChartA extends Component {
   render(){
 
         const radarValues = {
-          labels: ['Relative Humidity % (Max)', "Relative Humidity % (Min)", 'Temp Day \xB0F', 'Temp Night \xB0F', 'DLI Index'],
+          labels: [['Relative Humidity % (Max)', ''], "Relative Humidity % (Min)", 'Temp Day \xB0F', 'Temp Night \xB0F', 'DLI Index'],
           datasets:
           [
             {
@@ -85,12 +85,19 @@ class RadarChartA extends Component {
           },
           scale: {
             display: true,
+            gridLines: {
+              display: false
+            },
+
             ticks: {
-              fontSize: 10,
+              fontSize: 7,
               beginAtZero: true,
               steps: 10,
               stepValue: 5,
               max: 100
+            },
+            pointLabels: {
+              fontSize: 8
             }
           },
           layout: {

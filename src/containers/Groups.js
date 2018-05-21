@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Container, Icon, Form, Divider, Modal, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { fetchGroups, addGroup } from '../actions';
+import { addGroup } from '../actions';
 import styled from 'styled-components'
 
 
@@ -183,4 +183,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps, { fetchGroups, addGroup })(Groups)
+export default connect(mapStateToProps, { addGroup })(Groups)

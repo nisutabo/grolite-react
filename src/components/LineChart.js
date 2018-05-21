@@ -137,7 +137,7 @@ class LineChart extends Component {
                   labelString: "Humidity %  /  Temperature \xB0F"
                 },
                 ticks: {
-                  fontSize: 10,
+                  fontSize: 11,
                   beginAtZero: true,
                   steps: 10,
                   stepValue: 5,

@@ -29,9 +29,9 @@ class ValuePanel extends Component {
       <Table celled inverted selectable compact>
           <Table.Body>
             <Table.Row>
-              <Table.Cell><ActivityLabel>Quantity: </ActivityLabel></Table.Cell>
+              <Table.Cell><ActivityLabel>Expected Harvest: </ActivityLabel></Table.Cell>
               <Table.Cell><ActivityLabel>{this.props.group.trays} Trays </ActivityLabel></Table.Cell>
-              <Table.Cell textAlign='left'><ActivityLabel>{this.props.group.expected_harvest_lbs} lbs. (Expected)</ActivityLabel></Table.Cell>
+              <Table.Cell textAlign='left'><ActivityLabel>{this.props.group.expected_harvest_lbs} lbs.</ActivityLabel></Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell><ActivityLabel>Market Value: </ActivityLabel></Table.Cell>
@@ -39,14 +39,14 @@ class ValuePanel extends Component {
               <Table.Cell textAlign='left'><ActivityLabel>{percentage_of_total} % OF FARM</ActivityLabel></Table.Cell>
             </Table.Row>
             <Table.Row>
-              <Table.Cell><ActivityLabel>Quantity At Risk to Pests/Disease:</ActivityLabel></Table.Cell>
+              <Table.Cell><ActivityLabel>Disposed Due to Pests/Disease:</ActivityLabel></Table.Cell>
               <Table.Cell><ActivityLabel>0 Trays</ActivityLabel></Table.Cell>
               <Table.Cell textAlign='left'><ActivityLabel>0 lbs.</ActivityLabel></Table.Cell>
             </Table.Row>
             <Table.Row>
-              <Table.Cell><ActivityLabel>Quantity Disposed:</ActivityLabel></Table.Cell>
-              <Table.Cell><ActivityLabel>-</ActivityLabel></Table.Cell>
-              <Table.Cell textAlign='left'><ActivityLabel>-</ActivityLabel></Table.Cell>
+              <Table.Cell><ActivityLabel>Harvested Early:</ActivityLabel></Table.Cell>
+              <Table.Cell><ActivityLabel>0 Trays</ActivityLabel></Table.Cell>
+              <Table.Cell textAlign='left'><ActivityLabel>0 lbs.</ActivityLabel></Table.Cell>
             </Table.Row>
           </Table.Body>
         </Table>

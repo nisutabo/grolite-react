@@ -51,11 +51,14 @@ class SchedulePanel extends Component {
     let results = [[],[],[]];
 
     this.props.groups.forEach(group => {
-      if ( new Date(group.propagation_date) > today && new Date(group.propagation_date) < timePeriod){
+      if ((new Date(group.propagation_date) > today && new Date(group.propagation_date) < timePeriod) ||
+           new Date(group.propagation_date).toDateString() === today.toDateString()) {
         results[0].push(group)
-      } else if (new Date(group.production_date) > today && new Date(group.production_date) < timePeriod) {
+      } else if ((new Date(group.production_date) > today && new Date(group.production_date) < timePeriod) ||
+                  new Date(group.production_date).toDateString() === today.toDateString()) {
         results[1].push(group)
-      } else if (new Date(group.harvest_date) > today && new Date(group.harvest_date) < timePeriod) {
+      } else if ((new Date(group.harvest_date) > today && new Date(group.harvest_date) < timePeriod) ||
+                  new Date(group.harvest_date).toDateString() === today.toDateString()) {
         results[2].push(group)
     }
   })

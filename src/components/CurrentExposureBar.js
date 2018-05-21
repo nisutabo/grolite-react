@@ -10,7 +10,7 @@ const DataLabel = styled.label`
 `
 const UnitLabel = styled.label`
   font-family: Helvetica !important;
-  font-size: 40px !important;
+  font-size: 35px !important;
 `
 const MolLabel = styled.label`
   font-family: Helvetica !important;
@@ -33,12 +33,12 @@ class CurrentExposureBar extends Component {
 
   render(){
 
-    let currentTemp = this.props.data.current_temp
+    let currentTemp = this.props.data.today_tempf[0]
     let optimalTempDay = this.props.crop.temp_day
     let minimumTempDay = this.props.crop.temp_day_min
     let optimalTempNight = this.props.crop.temp_night
     let minimumTempNight = this.props.crop.temp_night_min
-    let currentHumidity = this.props.data.current_humidity
+    let currentHumidity = this.props.data.today_humidity[0]
     let optimalHumidityMax = this.props.crop.maxhumidity
     let optimalHumidityMin = this.props.crop.minhumidity
     let dli = this.props.data.dli
@@ -59,7 +59,7 @@ class CurrentExposureBar extends Component {
             return `${Math.round(currentTemp - optimalTempDay)}\xB0F above optimal daytime temperature (${optimalTempDay}\xB0F) for ${this.props.crop.name}`
           }
         } else {
-          if ((currentTemp < optimalTempNight) && (currentTemp > minimumTempNight)){
+          if ((currentTemp <= optimalTempNight) && (currentTemp >= minimumTempNight)){
             return `Within Ideal Range (${minimumTempNight}\xB0F - ${optimalTempNight}\xB0F) for ${this.props.crop.name}`
           } else if ((currentTemp < minimumTempNight)) {
             return `${Math.round(minimumTempNight - currentTemp)}\xB0F below nightime temperature floor (${minimumTempNight}\xB0F) for ${this.props.crop.name}`
@@ -68,9 +68,9 @@ class CurrentExposureBar extends Component {
           }
         }
     }
-
+    console.log(tempDelta())
     const humidityDelta = () => {
-        if (parseInt(currentHumidity, 10) > optimalHumidityMax){
+        if (parseInt(currentHumidity, 10) >= optimalHumidityMax){
           return `${Math.round(parseInt(currentHumidity, 10) - optimalHumidityMax)}% above humidity ceiling (${optimalHumidityMax}%) for ${this.props.crop.name}`
         } else if ((parseInt(currentHumidity, 10) <= optimalHumidityMax) && (parseInt(currentHumidity, 10) >= optimalHumidityMin)) {
           return `Within Ideal Range (${optimalHumidityMin}% - ${optimalHumidityMax}%) for ${this.props.crop.name}`
