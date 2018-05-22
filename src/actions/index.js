@@ -1,4 +1,4 @@
-const URL = 'http://localhost:3001/api/v1'
+const URL = 'frozen-temple-98851.herokuapp.com'
 
 
 export function signUp(username, password, location, history){
