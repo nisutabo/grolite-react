@@ -1,6 +1,9 @@
+const URL = 'http://localhost:3001/api/v1'
+
+
 export function signUp(username, password, location, history){
   return function(dispatch){
-    fetch("http://localhost:3001/api/v1/signup", {
+    fetch(`${URL}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +27,7 @@ export function signUp(username, password, location, history){
 
 export function logIn(username, password, history){
   return function(dispatch){
-    fetch("http://localhost:3001/api/v1/login", {
+    fetch(`${URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +56,7 @@ export function logIn(username, password, history){
 
 export function getUser(jwt, history){
   return function(dispatch){
-    fetch('http://localhost:3001/api/v1/get_user', {
+    fetch(`${URL}/get_user`, {
       headers: {
         "Authorization": jwt
       }
@@ -80,7 +83,7 @@ export const logOut = () => {
 
 export const fetchGroups = (id) => {
   return (dispatch) => {
-    return fetch(`http://localhost:3001/api/v1/users/${id}/groups`)
+    return fetch(`${URL}/users/${id}/groups`)
     .then(resp => resp.json())
     .then(result => {
       let payload = result
@@ -95,7 +98,7 @@ export const fetchGroups = (id) => {
 
 export const fetchCrop = (cropID) => {
   return (dispatch) => {
-    return fetch(`http://localhost:3001/api/v1/crops/${cropID}`)
+    return fetch(`${URL}/crops/${cropID}`)
     .then(resp => resp.json())
     .then(result => {
       let payload = result
@@ -114,7 +117,7 @@ export const fetchData = (groupID) => {
       type: 'LOADING'
     })
 
-    return fetch(`http://localhost:3001/api/v1/groups/${groupID}/data`)
+    return fetch(`${URL}/groups/${groupID}/data`)
     .then(resp => resp.json())
     .then(result => {
       let payload = result
@@ -130,7 +133,7 @@ export const fetchData = (groupID) => {
 
 export const addGroup = (group) => {
   return (dispatch) => {
-    return fetch(`http://localhost:3001/api/v1/groups`, {
+    return fetch(`${URL}/groups`, {
         method: 'POST',
         headers: {Accept: 'application/json',
         'Content-Type': 'application/json'
@@ -159,7 +162,7 @@ export const addGroup = (group) => {
 
   export const patchGroup = (group) => {
     return (dispatch) => {
-      return fetch(`http://localhost:3001/api/v1/groups/${group.id}`, {
+      return fetch(`${URL}/groups/${group.id}`, {
           method: 'PATCH',
           headers: {Accept: 'application/json',
           'Content-Type': 'application/json'
@@ -182,7 +185,7 @@ export const addGroup = (group) => {
 
 export const addReading = (reading) => {
   return (dispatch) => {
-    return fetch(`http://localhost:3001/api/v1/readings`, {
+    return fetch(`${URL}/readings`, {
         method: 'POST',
         headers: {Accept: 'application/json',
         'Content-Type': 'application/json'
@@ -205,7 +208,7 @@ export const addReading = (reading) => {
 
   export const addTask = (task) => {
     return (dispatch) => {
-      return fetch(`http://localhost:3001/api/v1/tasks`, {
+      return fetch(`${URL}/tasks`, {
           method: 'POST',
           headers: {Accept: 'application/json',
           'Content-Type': 'application/json'
@@ -230,7 +233,7 @@ export const addReading = (reading) => {
 
     export const patchTask = (task) => {
       return (dispatch) => {
-        return fetch(`http://localhost:3001/api/v1/tasks/${task.id}`, {
+        return fetch(`${URL}/tasks/${task.id}`, {
             method: 'PATCH',
             headers: {Accept: 'application/json',
             'Content-Type': 'application/json'
@@ -256,7 +259,7 @@ export const addReading = (reading) => {
 
       export const deleteTask = (task) => {
         return (dispatch) => {
-          return fetch(`http://localhost:3001/api/v1/tasks/${task.id}`, {
+          return fetch(`${URL}/tasks/${task.id}`, {
               method: 'DELETE',
               headers: {Accept: 'application/json',
               'Content-Type': 'application/json'
