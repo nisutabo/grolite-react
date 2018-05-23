@@ -1,4 +1,4 @@
-const URL = 'https://frozen-temple-98851.herokuapp.com/api/v1'
+const URL = 'https://immense-beyond-33029.herokuapp.com/api/v1'
 
 
 export function signUp(username, password, location, history){
