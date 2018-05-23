@@ -1,6 +1,6 @@
-const URL = 'https://immense-beyond-33029.herokuapp.com/api/v1'
+const URL = 'http://localhost:3001/api/v1'
 
-
+//https://immense-beyond-33029.herokuapp.com/api/v1
 export function signUp(username, password, location, history){
   return function(dispatch){
     fetch(`${URL}/signup`, {
