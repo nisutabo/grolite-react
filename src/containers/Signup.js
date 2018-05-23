@@ -13,7 +13,7 @@ const RowLabel = styled.label`
 
 const FormLabel = styled.label`
   font-family: Helvetica !important;
-  font-size: 12px !important;
+  font-size: 9px !important;
   color: black !important
 `
 
