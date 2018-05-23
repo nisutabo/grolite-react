@@ -117,28 +117,3 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps)(CropDoughnutChart)
-
-
-
-// the next 20 lines are simply for adding text inside doughnut chart
-// const originalDoughnutDraw = Chart.controllers.doughnut.prototype.draw;
-// Chart.helpers.extend(Chart.controllers.doughnut.prototype, {
-//   draw: function() {
-//     originalDoughnutDraw.apply(this, arguments);
-//
-//     const chart = this.chart.chart;
-//     const ctx = chart.ctx;
-//     const width = chart.width;
-//     const height = chart.height;
-//
-//     const fontSize = (height / 114).toFixed(2);
-//     ctx.font = fontSize + "em Helvetica";
-//     ctx.textBaseline = "middle";
-//
-//     const text = chart.config.data.text,
-//         textX = Math.round((width - ctx.measureText(text).width) / 1.96),
-//         textY = height / 1.82;
-//
-//     ctx.fillText(text, textX, textY);
-//   }
-// });

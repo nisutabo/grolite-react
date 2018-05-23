@@ -33,12 +33,12 @@ class CurrentExposureBar extends Component {
 
   render(){
 
-    let currentTemp = this.props.data.today_tempf[0]
+    let currentTemp = parseInt(this.props.data.today_tempf[0], 10)
     let optimalTempDay = this.props.crop.temp_day
     let minimumTempDay = this.props.crop.temp_day_min
     let optimalTempNight = this.props.crop.temp_night
     let minimumTempNight = this.props.crop.temp_night_min
-    let currentHumidity = this.props.data.today_humidity[0]
+    let currentHumidity = parseInt(this.props.data.today_humidity[0], 10)
     let optimalHumidityMax = this.props.crop.maxhumidity
     let optimalHumidityMin = this.props.crop.minhumidity
     let dli = this.props.data.dli
